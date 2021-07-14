@@ -3,5 +3,6 @@ module.exports = {
   user: '',
   password: '',
   database: '',
-  port: 5432
+  port: 5432,
+  apiKey: ''
 };
