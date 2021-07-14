@@ -1,24 +1,23 @@
 const axios = require('axios');
-const data = require('./data.js');
 const fs = require('fs');
+const config = require('../config.js');
 
-const apiKey = '0739bb7a9d064ca99b928c3020b10f75'; // Ima steal
-const diets = ['keto', 'paleo', 'vegan', 'vegetarian', 'glutenFree', 'dairyFree', 'pescatarian', 'whole30'];
-// const diets = ['keto', 'paleo'];
-
+const apiKey = config.apiKey; // Ima steal
+const diets = ['keto', 'paleo', 'vegan', 'lacto ovo vegetarian', 'gluten free', 'dairy free', 'pescatarian', 'whole 30'];
 
 var getRecipes = (type) => {
-  var recipes = {};
+var recipes = {};
 
   Promise.all(diets.map(name => {
     // get recipes for each of the diets listed in the diets array
-    return axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&diet=${name}&number=10&addRecipeInformation=true&fillIngredients=true&sort=popularity&type=${type}`)
+    return axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&diet=${name}&number=15&addRecipeInformation=true&fillIngredients=true&sort=popularity&type=${type}`)
       .then(res => {
         var temp = {};
         for (var i = 0; i < res.data.results.length; i++) {
           var recipe = res.data.results[i]
           temp[recipe.id] = recipe;
         }
+
         recipes[name] = temp;
       })
   }))
@@ -41,8 +40,3 @@ var getRecipes = (type) => {
 getRecipes('side dish');
 getRecipes('main course');
 
-
-
-
-
-// axios.all('https://api.spoonacular.com/recipes/findByNutrients')
