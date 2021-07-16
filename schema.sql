@@ -49,16 +49,14 @@ CREATE TABLE billyjoinme (
 --   picture_url VARCHAR(2048) NOT NULL
 -- );
 
-CREATE UNLOGGED TABLE recipes_import (doc JSON);
-\COPY recipes_import FROM '/Users/susanke/HackReactor/Blue-Ocean/RecipesAPI/data/importRecipes.json';
+-- CREATE UNLOGGED TABLE recipes_import (doc JSON);
+-- \COPY recipes_import FROM '/Users/chhuong/Documents/HRSFO135/RecipesAPI/data/importRecipes.json';
 
 INSERT INTO recipes (id, recipe_name, vegetarian, vegan, glutenFree, dairyFree, paleo, keto, pescatarian, whole30, diets, picture_url, servings, recipe_description, time_minutes, meal_type)
 SELECT r.*
 FROM recipes_import l
   CROSS JOIN LATERAL json_populate_recordset(null::recipes, doc) as r;
 
-
 SELECT SETVAL(pg_get_serial_sequence('recipes', 'id'), (SELECT max(id) FROM recipes));
 SELECT SETVAL(pg_get_serial_sequence('ingredients', 'id'), (SELECT max(id) FROM ingredients));
 SELECT SETVAL(pg_get_serial_sequence('billyjoinme', 'id'), (SELECT max(id) FROM billyjoinme));
-
