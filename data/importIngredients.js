@@ -1,4 +1,4 @@
-[
+const ingredients = [
   {
     "id": 1001,
     "ingredient_name": "butter",
@@ -2190,4 +2190,6 @@
     "price": 5.66,
     "aisle": "Tea and Coffee"
   }
-]
+];
+
+module.exports = ingredients;

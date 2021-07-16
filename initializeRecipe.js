@@ -45,7 +45,8 @@ function loadInitialRecipes (recipe) {
       price: random
     });
     eachRecipe.save()
-      .then(console.log('saved'));
+      .then(console.log('saved'))
+      .catch((err)=>console.log(err));
   }
 }
 
