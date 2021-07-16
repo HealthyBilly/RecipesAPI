@@ -1,4 +1,4 @@
-[
+const recipes = [
   {
     "diets": [
       "keto",
@@ -3473,4 +3473,6 @@
     "time_minutes": 30,
     "meal_type": "main"
   }
-]
+];
+
+module.exports = recipes;
