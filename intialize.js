@@ -1,5 +1,27 @@
 const recipe = require('./data/importRecipes.js');
 const connection = require('./db/mongo.js');
+const mongoose = require('mongoose');
+
+const recipeSchema = new mongoose.Schema ({
+  diets: [String],
+  whole30: Boolean,
+  paleo: Boolean,
+  vegan: Boolean,
+  dairyFree: Boolean,
+  pescatarian: Boolean,
+  glutenFree: Boolean,
+  vegetarian: Boolean,
+  keto: Boolean,
+  id: {
+    type: Number,
+    unique: true
+  },
+  recipe_name: String,
+  picture_url: String,
+  servings: Number,
+  price: Number
+});
+const Recipe = mongoose.model('Recipe', recipeSchema);
 
 function loadInitialRecipes (recipe) {
   for (let i = 0; i < recipe.length; i++) {
@@ -27,4 +49,4 @@ function loadInitialRecipes (recipe) {
   }
 }
 
-loadInitialRecipes(theBigBoy);
+loadInitialRecipes(recipe);
