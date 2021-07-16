@@ -3,6 +3,6 @@ mongoose.connect('mongodb://localhost:27017/recipee', {useNewUrlParser: true, us
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-donce('open', function() {
+db.once('open', function() {
   console.log("It connected");
 });

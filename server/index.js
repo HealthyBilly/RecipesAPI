@@ -8,6 +8,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/getrecipes/:prefs/:num', controller.getRecipes);
+app.get('/getingredients/:num?', controller.getIngredients);
 
 app.listen(port, () => {
   console.log(`HealthyBilly is listening to you http://localhost:${port}`)

@@ -10,6 +10,17 @@ module.exports = {
       .catch((err)=>{
         console.log(err);
         res.status(400).send(err);
+      });
+  },
+  getIngredients: function (req, res) {
+    const { num } = req.params;
+    model.getIngredients(num)
+      .then((data)=>{
+        res.status(200).send(data);
       })
+      .catch((err)=>{
+        console.log(err);
+        res.status(400).send(err);
+      });
   }
 }
